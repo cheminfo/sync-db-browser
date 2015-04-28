@@ -3,7 +3,7 @@
 var SyncDB = exports.SyncDB = require('sync-db');
 var IDBDriver = exports.IDBDriver = require('sync-db-idb');
 
-exports.sync = function (name, url, driver) {
+exports.createSync = function (name, url, driver) {
     if (typeof name !== 'string')
         throw new TypeError('name argument must be a string');
     if (driver === undefined)
