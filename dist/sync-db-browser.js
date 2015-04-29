@@ -1,6 +1,6 @@
 /**
  * sync-db-browser - Browserified version of SyncDB bundled with IndexedDB driver
- * @version v0.0.1
+ * @version v0.0.2
  * @link https://github.com/cheminfo/sync-db-browser#readme
  * @license MIT
  */
@@ -1019,9 +1019,11 @@ function IDBDriver(dbName) {
 
     this._db = null;
     this._name = dbName;
+
+    this.init = this._init();
 }
 
-IDBDriver.prototype.init = function () {
+IDBDriver.prototype._init = function () {
     var self = this;
     return new Promise(function (resolve, reject) {
         var openRequest = window.indexedDB.open(self._name, 1);
@@ -2435,11 +2437,12 @@ function SyncDB(options) {
     this._exec = null;
 }
 
-SyncDB.prototype.sync = function () {
+SyncDB.prototype.sync = function (options) {
     if (this._exec) {
         return this._exec;
     }
-    var exec = new Sync(this._driver, this._url);
+    options = options || {};
+    var exec = new Sync(this._driver, this._url, options.limit);
     this._exec = exec;
 
     var self = this;
@@ -2462,15 +2465,15 @@ var EventEmitter = require('events').EventEmitter;
 
 var agent = require('superagent');
 
-function Sync(driver, url) {
+function Sync(driver, url, limit) {
     EventEmitter.call(this);
     this._driver = driver;
     this._url = url;
     this._seqid = 0;
     this._inserted = 0;
-    this._limit = 5;
+    this._limit = limit || 5;
     var self = this;
-    this._promise = driver.init().then(function () {
+    this._promise = driver.init.then(function () {
         return self._start();
     });
     this._promise.catch(function (e) {
@@ -2489,10 +2492,7 @@ Sync.prototype._start = function () {
             var infoUrl = self._url + '/info?since=' + id;
             agent.get(infoUrl).end(function (err, result) {
                 if (err) return reject(err);
-                self.emit('progress', {
-                    type: 'info',
-                    value: result.body
-                });
+                self.emit('info', result.body);
                 self._fetch(resolve, reject);
             });
         });
@@ -2514,10 +2514,7 @@ Sync.prototype._fetch = function (resolve, reject) {
                 self._driver.insert(res).then(function () {
                     self._seqid = res.seqid;
                     self._inserted++;
-                    self.emit('progress', {
-                        type: 'insert',
-                        value: res.value
-                    });
+                    self.emit('progress', res);
                     insert();
                 }, reject);
             } else if (result.length === 0) {
