@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/cheminfo/sync-db-browser#readme",
   "dependencies": {
-    "sync-db": "0.0.3",
-    "sync-db-idb": "0.0.2"
+    "sync-db": "0.0.4",
+    "sync-db-idb": "0.0.3"
   },
   "devDependencies": {
     "browserify": "^8.1.3",
