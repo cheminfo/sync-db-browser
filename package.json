@@ -1,6 +1,6 @@
 {
   "name": "sync-db-browser",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Browserified version of SyncDB bundled with IndexedDB driver",
   "main": "index.js",
   "scripts": {

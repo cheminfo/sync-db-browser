@@ -1,6 +1,6 @@
 /**
  * sync-db-browser - Browserified version of SyncDB bundled with IndexedDB driver
- * @version v0.0.2
+ * @version v0.0.3
  * @link https://github.com/cheminfo/sync-db-browser#readme
  * @license MIT
  */
@@ -1050,6 +1050,21 @@ IDBDriver.prototype.insert = function (obj) {
         };
         var objectStore = transaction.objectStore(OBJECT_STORE_DATA);
         objectStore.put(obj);
+    });
+};
+
+IDBDriver.prototype.get = function (id) {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+        var transaction = self._db.transaction(OBJECT_STORE_DATA, 'readonly');
+        transaction.onerror = function () {
+            reject(transaction.error);
+        };
+        var objectStore = transaction.objectStore(OBJECT_STORE_DATA);
+        var request = objectStore.get(id);
+        request.onsuccess = function (event) {
+            resolve(event.target.result);
+        };
     });
 };
 
