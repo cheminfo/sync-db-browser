@@ -1,10 +1,10 @@
 {
   "name": "sync-db-browser",
   "version": "0.0.3",
-  "description": "Browserified version of SyncDB bundled with IndexedDB driver",
+  "description": "Webpacked version of SyncDB bundled with IndexedDB driver",
   "main": "index.js",
   "scripts": {
-    "build": "gulp build"
+    "build": "cheminfo build --root SyncDB"
   },
   "repository": {
     "type": "git",
@@ -16,9 +16,6 @@
     "browser",
     "indexeddb"
   ],
-  "config": {
-    "name": "SyncDB"
-  },
   "author": "Michaël Zasso",
   "license": "MIT",
   "bugs": {
@@ -30,14 +27,6 @@
     "sync-db-idb": "0.0.4"
   },
   "devDependencies": {
-    "browserify": "^8.1.3",
-    "del": "^1.1.1",
-    "gulp": "^3.8.11",
-    "gulp-header": "^1.2.2",
-    "gulp-rename": "^1.2.0",
-    "gulp-sourcemaps": "^1.3.0",
-    "gulp-uglify": "^1.1.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.0.0"
+    "cheminfo-tools": "^1.0.2"
   }
 }
