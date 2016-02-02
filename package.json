@@ -23,10 +23,10 @@
   },
   "homepage": "https://github.com/cheminfo/sync-db-browser#readme",
   "dependencies": {
-    "sync-db": "0.0.4",
-    "sync-db-idb": "0.0.4"
+    "sync-db": "0.2.0",
+    "sync-db-idb": "0.1.1"
   },
   "devDependencies": {
-    "cheminfo-tools": "^1.0.2"
+    "cheminfo-tools": "^1.3.4"
   }
 }
