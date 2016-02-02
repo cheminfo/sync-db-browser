@@ -1,6 +1,6 @@
 {
   "name": "sync-db-browser",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Webpacked version of SyncDB bundled with IndexedDB driver",
   "main": "src/index.js",
   "scripts": {
