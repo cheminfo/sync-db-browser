@@ -2,7 +2,7 @@
   "name": "sync-db-browser",
   "version": "0.0.3",
   "description": "Webpacked version of SyncDB bundled with IndexedDB driver",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "build": "cheminfo build --root SyncDB"
   },
